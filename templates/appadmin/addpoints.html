@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        .card {
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+            .form-row input[type="text"],
+            .form-row select {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #cccccc;
+        }
+
+        .app-point-button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#" class="btn btn-primary btn-block">Home</a>
+        <a href="/points" class="btn btn-primary btn-block">+Add Apps</a>
+    </div>
+
+    <div class="content">
+        <h2 class="text-center">Hello Admin</h2>
+
+        <div class="card">
+
+            <div class="form-row">
+
+            </div>
+            <div class="form-row">
+                <input placeholder="App-name" type="text" id="input1" name="input1" class="form-control">
+                <label for="input2"></label>
+                <input placeholder="App-link" type="text" id="input2" name="input2" class="form-control">
+            </div>
+          <div class="form-row">
+                <div class="col">
+                    <label for="category"></label>
+                    <form method="POST">
+                        {% csrf_token %}
+
+                    <select id="category" name="category" class="form-control">
+                        {% for name in categories %}
+                        <option value="{{ name.appname }}">{{ name.name }}</option>
+                        {% endfor %}
+                    </select>
+                    </form>
+                </div>
+                <div class="col">
+                    <label for="subcategory"></label>
+                    <select id="subcategory" name="subcategory" class="form-control">
+                        <option value="subcategory1">Subcategory 1</option>
+                       {% for name in subcategories %}
+
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+
+            <input type="text" id="input-field" placeholder="Enter new value" />
+            <button id="change-button">Change Value</button>
+            <br />
+    <span id="value-display">Initial Value</span>
+        </div>
+
+    <script>
+        $(document).ready(function() {
+            // Get the input field and change button elements
+            var inputField = $("#input-field");
+            var changeButton = $("#change-button");
+            var valueDisplay = $("#value-display");
+
+            // Add click event listener to the change button
+            changeButton.click(function() {
+                // Get the new value from the input field
+                var newValue = inputField.val();
+
+                // Update the value display
+                valueDisplay.text(newValue);
+            });
+        });
+    </script>
+</body>
+</html>

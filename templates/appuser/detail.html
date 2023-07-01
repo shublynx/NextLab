@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Homepage</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
+
+    <style>
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 200px;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+
+        .content {
+            margin-left: 200px;
+            padding: 20px;
+        }
+
+        .card {
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #cccccc;
+            border-radius: 5px;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .form-row {
+            margin-bottom: 10px;
+        }
+
+        .form-row {
+            margin-right: 10px;
+        }
+
+        .form-row input[type="text"],
+        .form-row select {
+            flex: 1;
+            padding: 5px;
+            border: 1px solid #cccccc;
+        }
+
+        .app-point-button {
+            padding: 10px;
+            background-color: #007bff;
+            color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .drag-drop-area {
+            width: 100%;
+            height: 300px;
+            border: 2px dashed #cccccc;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="sidebar">
+        <a href="#" class="btn btn-primary btn-block">Home</a>
+        <a href="#" class="btn btn-primary btn-block">Profile</a>
+        <a href="#" class="btn btn-primary btn-block">Points</a>
+        <a href="#" class="btn btn-primary btn-block">Task</a>
+        <br>
+        <form action="/logout/" method="POST" class="logoutbtn">
+            {% csrf_token %}
+            <a href="/logout" class="btn btn-primary btn-block" name="logoutbtn">Logout</a>
+        </form>
+    </div>
+
+    <div class="content">
+        <h2 class="text-center">Hello User</h2>
+
+        <div class="card bg-secondary">
+            <div class="card-body">
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <h2 class="card-title mb-4">{{ appdetail.appname }}</h2>
+                    </div>
+                    <div class="col-md-6 d-flex justify-content-end">
+                        <a href="#" class="btn btn-primary">{{ appdetail.points }} Points</a>
+                    </div>
+                </div>
+
+                <div class="drag-drop-area" id="dragDropArea">
+                    <h4>Drag and drop image here</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // JavaScript code to handle file upload
+        const dragDropArea = document.getElementById('dragDropArea');
+
+        dragDropArea.addEventListener('dragenter', handleDragEnter, false);
+        dragDropArea.addEventListener('dragover', handleDragOver, false);
+        dragDropArea.addEventListener('dragleave', handleDragLeave, false);
+        dragDropArea.addEventListener('drop', handleDrop, false);
+
+        function handleDragEnter(event) {
+            event.preventDefault();
+            dragDropArea.style.border = '2px dashed #007bff';
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+        }
+
+        function handleDragLeave(event) {
+            event.preventDefault();
+            dragDropArea.style.border = '2px dashed #cccccc';
+        }
+
+        function handleDrop(event) {
+            event.preventDefault();
+            dragDropArea.style.border = '2px dashed #cccccc';
+
+            const file = event.dataTransfer.files[0];
+            // Perform file upload or any other necessary actions
+            console.log('Uploaded file:', file);
+        }
+    </script>
+
+</body>
+</html>

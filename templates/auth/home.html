@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/js/bootstrap.bundle.min.js"></script>
+    <title>Home</title>
+    <style>
+
+       body {
+      background-image: url("{% static 'images/capture.png' %}");
+      background-size: cover;
+      background-size: 100% 100%;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.9;
+
+    }
+
+    .container {
+            text-align: left;
+            margin-top: 700px;
+            color: #ffffff;
+            font-family: "Comic Sans MS", cursive;
+        }
+
+        .col-md-6 {
+            text-align: center;
+        }
+    </style>
+</head>
+<body class="bg-secondary">
+
+<div class="container bg-secondary">
+    <div class="row">
+        <div class="col-md-6 bg-warning">
+            <!-- Login button -->
+            <a href="/login" class="btn btn-warning">Login</a>
+        </div>
+        <div class="col-md-6 bg-danger">
+            <!-- Register button -->
+            <a href="/register" class="btn btn-danger">Register</a>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
