@@ -22,7 +22,7 @@
         }
 
         .card {
-            height: 150px;
+            height: 500px;
             background-color: #ffffff;
             border: 1px solid #cccccc;
             border-radius: 5px;
@@ -31,14 +31,6 @@
             flex-direction: column;
             align-items: center;
             justify-content: space-between;
-        }
-
-        .form-row {
-            margin-bottom: 10px;
-        }
-
-        .form-row label {
-            margin-right: 10px;
         }
 
         .form-row input[type="text"],
@@ -56,28 +48,22 @@
             border-radius: 5px;
             cursor: pointer;
         }
-        .button-container {
-           display: flex;
-            justify-content: flex-end;
-            align-items: center;
-            margin-left: 100px;
-        }
-
     </style>
 </head>
 <body>
 
     <div class="sidebar">
-        <a href="/login/appadmin/home" class="btn btn-primary btn-block">Home</a>
-        <a href="/points" class="btn btn-primary btn-block">+Add Apps</a>
+        <a href="/login/appadmin" class="btn btn-primary btn-block">Home</a>
+        <a href="/login/appadmin/points" class="btn btn-primary btn-block">+Add Apps</a>
         <br>
         <form action="/logout/" method="POST" class="logoutbtn">
             {% csrf_token %}
             <a href="/logout" class="btn btn-primary btn-block" name="logoutbtn">Logout</a>
         </form>
     </div>
+
     <div class="content">
-      <h2>List of added apps till now!!!</h2>
+
         {% for app in apps %}
     <div class="card bg-secondary">
         <div class="row g-0">

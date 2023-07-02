@@ -3,7 +3,8 @@ from appadmin import views
 
 
 urlpatterns = [
-    path("login/appadmin/",views.index),
+    path("login/appadmin/",views.adminhome),
+    path("login/appadmin/points",views.addapps),
 
 
 ]

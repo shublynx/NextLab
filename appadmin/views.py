@@ -8,6 +8,21 @@ def index(request):
 
     return render(request,'appadmin/indexx.html',{'categories':categories,'subcategories':subcategories})
 
+def addapps(request):
+
+
+    categories = Category.objects.all()
+    subcategories = Subcategory.objects.all()
+
+    return render(request, 'appadmin/addapps.html', {'categories': categories, 'subcategories': subcategories})
+
+
+def adminhome(request):
+
+    apps = AdminModel.objects.all()
+    return render(request, 'appadmin/adminhome.html', {'apps': apps})
+
+
 def save_app(request):
 
     if request.method == 'POST':

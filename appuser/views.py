@@ -14,9 +14,7 @@ def detail(request,id):
     appdetail = AdminModel.objects.get(id=id)
     return render(request,'appuser/detail.html',{'appdetail':appdetail})
 
-def addpoints(request):
 
-    return render(request,'appuser/addpoints.html')
 
 def register(request):
 
