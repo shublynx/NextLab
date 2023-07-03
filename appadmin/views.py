@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import AdminModel,Category,Subcategory
+from django.contrib import messages
 # Create your views here.
 
 def index(request):
@@ -26,13 +27,25 @@ def adminhome(request):
 def save_app(request):
 
     if request.method == 'POST':
-        appname = request.POST['appname']
-        applink = request.POST['applink']
-        category = request.POST['category']
-        subcategory = request.POST['subcategory']
-        points = request.POST['points']
+        apppic = request.FILES.get('imageUpload')
+        appname = request.POST.get('appname')
+        applink = request.POST.get('applink')
+        category = request.POST.get('category')
+        subcategory = request.POST.get('subcategory')
+        points = request.POST.get('pointsInput')
 
-        appmodel = AdminModel(appname=appname,applink=applink,category=category,subcategory=subcategory,points=points)
-        appmodel.save()
+        admin_model = AdminModel(
+            apppic=apppic,
+            appname=appname,
+            applink=applink,
+            category_id=category,
+            subcategory_id=subcategory,
+            points=points
+        )
+        admin_model.save()
+
+        messages.success(request, 'App added successfully!')
+
+        return redirect('login/appadmin/')
 
 

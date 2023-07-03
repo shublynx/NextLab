@@ -1,57 +1,85 @@
 <!DOCTYPE html>
+{% load static %}
 <html>
 <head>
     <title>Homepage</title>
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.6.3.js" integrity="sha256-nQLuAZGRRcILA+6dMBOvcRh5Pe310sBpanc6+QBmyVM=" crossorigin="anonymous"></script>
 
-    <style>
-        .sidebar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            height: 100vh;
-            width: 200px;
-            background-color: #f8f9fa;
-            padding: 20px;
-        }
+<style>
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 200px;
+        background-color: #f8f9fa;
+        padding: 20px;
+    }
 
-        .content {
-            margin-left: 200px;
-            padding: 20px;
-        }
+    .content {
+        margin-left: 200px;
+        padding: 20px;
+    }
 
-        .card {
-            height: 500px;
-            background-color: #ffffff;
-            border: 1px solid #cccccc;
-            border-radius: 5px;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
+    .card {
+        background-color: #ffffff;
+        border: 1px solid #cccccc;
+        border-radius: 5px;
+        padding: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
 
-        .form-row input[type="text"],
-        .form-row select {
-            flex: 1;
-            padding: 5px;
-            border: 1px solid #cccccc;
-        }
+    .card-img {
+        flex: 1;
+        max-width: 200px;
+        max-height: 200px;
+        justify-content: left;
+    }
 
-        .app-point-button {
-            padding: 10px;
-            background-color: #007bff;
-            color: #ffffff;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
+    .card-img img {
+        display: block;
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+
+    .card-details {
+        flex: 1;
+        padding: 0 10px;
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .card-link {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+      .card-points {
+        display: flex;
+        justify-content: right;
+        align-items: right;
+        height: 100%;
+        margin-bottom: 60px;
+    }
+
+
+    .app-point-button {
+        padding: 10px;
+        background-color: #007bff;
+        color: #ffffff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+</style>
 </head>
 <body>
-
     <div class="sidebar">
         <a href="/login/appadmin" class="btn btn-primary btn-block">Home</a>
         <a href="/login/appadmin/points" class="btn btn-primary btn-block">+Add Apps</a>
@@ -63,32 +91,23 @@
     </div>
 
     <div class="content">
-
         {% for app in apps %}
-    <div class="card bg-secondary">
-        <div class="row g-0">
-            <div class="col-md-2">
-                <img src="{{ app.image }}" class="img-fluid" alt="Image">
-            </div>
-            <div class="col-md-10">
-                <div class="card-body d-flex align-items-center col-md-6">
-                    <div>
-                        <h2  class="card-title"><b>{{ app.appname }}</b></h2>
-                        <h7><a href="/{{ app.id }}" class="card-text text-dark">View in detail</h7>
-                    </div>
-                    <form method="POST">
-                        {% csrf_token %}
-                    <div class="button-container">
-                        <a href="#" class="btn btn-primary">{{ app.points}} Points</a>
-                    </div>
-                    </form>
+            <div class="card bg-secondary">
+                <div class="row">
+                <div class="card-img col-md-4">
+                    <img src="/media/{{ app.apppic }}" class="img-fluid" alt="Image">
+                </div>
+                <div class="card-details col-md-4">
+                    <h2 class="card-title"><b>{{ app.appname }}</b></h2>
+                    <h7><a href="/{{ app.id }}" class="card-link text-dark">View in detail</a></h7>
+                </div>
+                <div class="card-points col-md-4">
+                    <a href="#" class="btn btn-primary">{{ app.points }} Points</a>
+                </div>
                 </div>
             </div>
-        </div>
-    </div>
-        <br>
+            <br>
         {% endfor %}
     </div>
-
 </body>
 </html>

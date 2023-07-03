@@ -20,11 +20,11 @@ class Subcategory(models.Model):
 
 
 class AdminModel(models.Model):
-    apppic = models.ImageField(upload_to="Images/",default="Images/Noimg.jpg")
+    apppic = models.FileField(upload_to='appadmin/',max_length=250,default=None)
     appname = models.CharField(max_length=100)
     applink = models.URLField()
-    category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE,null=True)
+    subcategory = models.ForeignKey(Subcategory, on_delete=models.CASCADE,null=True)
     points = models.CharField(max_length=10)
 
     def __str__(self):
